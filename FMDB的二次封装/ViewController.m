@@ -7,7 +7,13 @@
 //
 
 #import "ViewController.h"
-
+#import "DaoBase.h"
+#import "RuntimeModel.h"
+#import "TestModel.h"
+#import "TestModel2.h"
+#import "TestModel3.h"
+#import "MovieDao.h"
+#import "SQLiteStudy.h"
 @interface ViewController ()
 
 @end
@@ -17,6 +23,75 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+//    SQLiteStudy *manager = [[SQLiteStudy alloc] init];
+//    [manager createConstraintTable];
+#pragma 方式一
+#if 0
+    RuntimeModel *model = [[RuntimeModel alloc] init];
+    model.name = @"10";
+    model.stu_num = @"21";
+    model.address = @"21";
+    model.school_name = @"31";
+    model.phone_num = @"41";
+    model.testModel = [[TestModel alloc]init];
+    model.testModel.nice = @"nice1";
+    TestModel2 *model2 = [[TestModel2 alloc] init];
+    
+    model2.filmId = @"1";
+    model2.filmLong = @"100";
+    model2.filmTime = @"213";
+    model2.filmRegion = @"2";
+    model2.filmType = @"1";
+    
+    model2.testmodel3 = [[TestModel3 alloc] init];
+    model2.testmodel3.actorId = @"1";
+    model2.testmodel3.filmId = @"1";
+    model2.testmodel3.actorAge = @"10";
+    model2.testmodel3.actorName = @"nice";
+    model2.testmodel3.headImgUrl = @"2";
+    
+    model2.testModel2 = model2;
+    
+    
+//    model.testModel2.baoshan = @"baoshan1";
+    model.testModel2.testmodel3 = [[TestModel3 alloc] init];
+//    model.testModel2.testmodel3.hans = @"hans1";
+    
+//        [[DaoBase getInstance] saveData:model]; //insert
+    //    [[DaoBase getInstance]updateData:model]; //update
+    
+    /*  查询需要优化
+       NSArray *a = [[DaoBase getInstance]searchData:@"RuntimeModel"];
+        NSArray *b = [[DaoBase getInstance] searchData:@"TestModel"];
+        for (RuntimeModel *s in a) {
+            for (TestModel *s1 in b) {
+                s.testModel = s1;
+                NSLog(@"%@",s.testModel.nice);
+            }
+        }
+     */
+//    [[DaoBase getInstance] removeAll:@"RuntimeModel"];//delete
+#else
+#pragma mark 方式二
+    TestModel2 *model = [[TestModel2 alloc] init];
+    model.filmId = @"3";
+    model.filmLong = @"1003";
+    model.filmTime = @"2133";
+    model.filmRegion = @"231";
+    model.filmType = @"131";
+    
+    model.testmodel3 = [[TestModel3 alloc] init];
+    model.testmodel3.actorId = @"231";
+    model.testmodel3.filmId = @"3";
+    model.testmodel3.actorAge = @"130";
+    model.testmodel3.actorName = @"nice3";
+    model.testmodel3.headImgUrl = @"231";
+    [MovieDao saveMovie:model];
+//    [MovieDao loadMovieCompletion:^(TestModel2 *model) {
+//        NSLog(@"testmodel3:%@",model.testmodel3.filmId);
+//    }];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
